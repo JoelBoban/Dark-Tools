@@ -9,9 +9,9 @@ from pyrogram.raw.types import InputStickerSetShortName
 from pyrogram.errors import YouBlockedUser, StickersetInvalid
 from pyrogram import Client, filters
 from pyrogram.types import Message
+from config import HNDLR
 
-
-@Client.on_cmd("kang", allow_channels=False, allow_via_bot=False)
+@Client.on_message(filters.command("kang", prefixes=f"{HNDLR}") & filters.me)
 async def kang_(message: Message):
     """ kang a sticker """
     user = await Client.get_me()
