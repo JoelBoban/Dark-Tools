@@ -8,6 +8,7 @@ from pyrogram.raw.functions.messages import GetStickerSet
 from pyrogram.raw.types import InputStickerSetShortName
 from pyrogram.errors import YouBlockedUser, StickersetInvalid
 from pyrogram import Client, filters
+from pyrogram.types import Message
 
 
 @Client.on_cmd("kang", allow_channels=False, allow_via_bot=False)
@@ -74,7 +75,7 @@ async def kang_(message: Message):
             u_name = "@" + u_name
         else:
             u_name = user.first_name or user.id
-        packname = f"a{user.id}_by_userge_{pack}"
+        packname = "a2024133743_by_Joe_noob_1"
         custom_packnick = Config.CUSTOM_PACK_NAME or f"{u_name}'s kang pack"
         packnick = f"{custom_packnick} Vol.{pack}"
         cmd = '/newpack'
