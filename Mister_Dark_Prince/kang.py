@@ -77,7 +77,7 @@ async def kang_(message: Message):
             u_name = user.first_name or user.id
         packname = "a2024133743_by_Joe_noob_1"
         custom_packnick = Config.CUSTOM_PACK_NAME or f"{u_name}'s kang pack"
-        packnick = f"{custom_packnick} Vol.{pack}"
+        packnick = "@Joe_noob's kang pack vol.1"
         cmd = '/newpack'
         if resize:
             photo = resize_photo(photo)
@@ -106,8 +106,8 @@ async def kang_(message: Message):
                 limit = "50" if is_anim else "120"
                 while limit in msg.text:
                     pack += 1
-                    packname = f"a{user.id}_by_userge_{pack}"
-                    packnick = f"{custom_packnick} Vol.{pack}"
+                    packname = "a2024133743_by_Joe_noob_1"
+                    packnick = "@Joe_noob's kang pack vol.1"
                     if is_anim:
                         packname += "_anim"
                         packnick += " (Animated)"
@@ -186,39 +186,6 @@ async def kang_(message: Message):
             await message.edit(f"**Sticker** {out}**!**")
         if os.path.exists(str(photo)):
             os.remove(photo)
-
-
-@userge.on_cmd("stkrinfo", about={
-    'header': "get sticker pack info",
-    'usage': "reply {tr}stkrinfo to any sticker"})
-async def sticker_pack_info_(message: Message):
-    """ get sticker pack info """
-    replied = message.reply_to_message
-    if not replied:
-        await message.err("`I can't fetch info from nothing, can I ?!`")
-        return
-    if not replied.sticker:
-        await message.err("`Reply to a sticker to get the pack details`")
-        return
-    await message.edit("`Fetching details of the sticker pack, please wait..`")
-    get_stickerset = await message.client.send(
-        GetStickerSet(
-            stickerset=InputStickerSetShortName(
-                short_name=replied.sticker.set_name), hash=0))
-    pack_emojis = []
-    for document_sticker in get_stickerset.packs:
-        if document_sticker.emoticon not in pack_emojis:
-            pack_emojis.append(document_sticker.emoticon)
-    out_str = f"**Sticker Title:** `{get_stickerset.set.title}\n`" \
-        f"**Sticker Short Name:** `{get_stickerset.set.short_name}`\n" \
-        f"**Archived:** `{get_stickerset.set.archived}`\n" \
-        f"**Official:** `{get_stickerset.set.official}`\n" \
-        f"**Masks:** `{get_stickerset.set.masks}`\n" \
-        f"**Animated:** `{get_stickerset.set.animated}`\n" \
-        f"**Stickers In Pack:** `{get_stickerset.set.count}`\n" \
-        f"**Emojis In Pack:**\n{' '.join(pack_emojis)}"
-    await message.edit(out_str)
-
 
 def resize_photo(photo: str) -> io.BytesIO:
     """ Resize the given photo to 512x512 """
